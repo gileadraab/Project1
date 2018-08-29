@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session
+from flask import Flask, render_template, request, session
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -17,10 +17,20 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("postgresql://localhost:5432"))
+engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
-
-@app.route("/")
+#Login page
+@app.route("/login")
 def index():
-    return "Project 1: TODO"
+	return render_template("index.html")
+
+#User page
+@app.route("/user". methods=["POST"])
+def user():
+	for user in username:
+		
+
+
+
+
