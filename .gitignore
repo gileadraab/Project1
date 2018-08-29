@@ -111,3 +111,4 @@ dmypy.json
 
 flask_session/
 *.out
+*.sublime-workspace
