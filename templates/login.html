@@ -7,11 +7,11 @@
 {% block body %}
     <h3>Enter your username and password</h3>
 
-    <form action="{{ url_for('user') }}" method="post">
-        <p><input type="text" username="username" placeholder = "Enter your username"></p>
+    <form action="{{ url_for('login') }}" method="post">
+        <p><input type="text" name="username" placeholder = "Enter your username"></p>
         <p><input type="password" password="password" placeholder = "Enter your password"></p>
         <p><button>Login</button></p>
-    <form>
+    </form>
     <p>Don't have an account yet? <a href="{{ url_for('create_account') }}">sign up</a></p>
 
 {% endblock %}

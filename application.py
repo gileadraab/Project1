@@ -26,15 +26,24 @@ def encrypt_string(hash_string):
     sha_signature = hashlib.sha256(hash_string.encode()).hexdigest()
     return sha_signature
 
-
+#Homepage
 @app.route("/")
 def index():
 	return render_template("index.html")
 
 #Login page
-@app.route("/login")
+@app.route("/login", methods=["POST", "GET"])
 def login():
-	return render_template("login.html")
+	if request.method=="GET":
+		return render_template("login.html")
+	
+	elif request.method=="POST":
+		username = request.form.get("username")
+		password = request.form.get("password")
+		hashed_password = encrypt_string(password)
+		db.execute("SELECT * FROM users WHERE username = :username AND password = :password",
+			{"username": username, "password": hashed_password})
+		return "under construction..."
 
 #Create account page
 @app.route("/create_account", methods=["POST", "GET"])
@@ -54,11 +63,6 @@ def create_account():
 		return "Succes!"
 
 #User page
-@app.route("/user", methods=["POST"])
-def user():
-	username = request.form.get("username")
-	password = request.form.get("password")
-	db.execute("SELECT * FROM users WHERE username = :username",{"username":username})
-	return "under construction..."
+
 
 	
