@@ -32,16 +32,26 @@ def index():
 	return render_template("index.html")
 
 
-@app.route("/books", methods=["POST", "GET"])
+#Search results
+@app.route("/books", methods=["GET"])
 def books():
-	book_search = request.form.get("books")
+	book_search = request.args.get("books")
 	search_result = db.execute("SELECT * FROM books WHERE title = :books OR isbn = :books OR author = :books",
 		{"books": book_search}).fetchall()
 	print (search_result)
 	if len(search_result)<1:
 		return render_template("error.html", message="There is no such book")
-	else:	
-		return render_template("books.html")
+	else:
+		session["books"]=search_result
+		return render_template("books.html", books=search_result)
+
+
+#Book page
+@app.route("/book/<isbn>")
+def book(isbn):
+	books = session["books"]
+	book = books[0]
+	return render_template ("book.html", book=book)
 
 #Login page
 @app.route("/login", methods=["POST", "GET"])

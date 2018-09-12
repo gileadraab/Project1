@@ -8,12 +8,13 @@
     <h1>All Books</h1>
 
     <ul>
-        {% for book in search_result %}
+        {% for book in books %}
             <li>
-                <a>
-                    {{ book }}
+                <a href="{{ url_for('book', isbn=book.isbn) }}">
+                    {{ book.title }}
                 </a>
             </li>
+
         {% endfor %}
     </ul>
 

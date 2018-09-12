@@ -1,19 +1,22 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    {{book.name}}
+    {{ book.title }}
 {% endblock %}
 
 {% block body %}
-    <h1>Book Details</h1>
+    <h1>Book Details:</h1>
+    <p>
+    </p>
 
     <ul>
+        <li><h3>{{ book.title }}</h3></li>
         <li>ISBN: {{ book.isbn }}</li>
-        <li>Name: {{ book.name }}</li>
-        <li>Author: {{ flight.author}}</li>
+        <li>Author: {{ book.author }}</li>
+        <li>Year: {{ book.year }}</li>
     </ul>
 
-    <h2>Score</h2>
+    <h3>Book Score</h3>
     <ul>
     </ul>
 
